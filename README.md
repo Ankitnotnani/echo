@@ -11,10 +11,11 @@ Every reply shows where it came from (`LIVE_INFERENCE` or `LLM_CACHE`), the mode
 
 | What | URL |
 | --- | --- |
-| Frontend | https://echo-chat.vercel.app *(replace after deploy)* |
-| Backend | https://echo-api.onrender.com *(replace after deploy)* |
-| Health | https://echo-api.onrender.com/health |
-| Demo video | *(link)* |
+| Frontend | https://echo-chat-lake.vercel.app |
+| Backend | https://echo-api-xhvp.onrender.com |
+| Health | https://echo-api-xhvp.onrender.com/health |
+| GitHub | https://github.com/Ankitnotnani/echo |
+| Demo video | *(link added after recording)* |
 
 > The backend runs on Render's free tier, which sleeps after ~15 minutes idle. The first request after that can take ~50 seconds; the UI shows "Waking up the server…" and retries automatically.
 
@@ -112,7 +113,7 @@ flowchart LR
 
 ## 4. Verification
 
-Replace `$API` with `http://localhost:8000` or the Render URL.
+Replace `$API` with `http://localhost:8000` or the live backend `https://echo-api-xhvp.onrender.com`.
 
 ```bash
 # health

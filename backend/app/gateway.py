@@ -174,11 +174,15 @@ class LLMGateway:
             for with_ttl in (True, False):
                 try:
                     cache = cache_cls(**kwargs, ttl=ttl) if (with_ttl and ttl) else cache_cls(**kwargs)
-                except TypeError:
-                    continue  # this LiteLLM version has no `ttl` argument
-                except Exception as exc:
-                    logger.warning("LiteLLM %s cache unavailable (%s); trying next option", name, type(exc).__name__)
-                    break
+                except Exception as exc:  # e.g. this LiteLLM version rejects `ttl` here
+                    logger.warning(
+                        "LiteLLM %s cache%s unavailable (%s: %s)",
+                        name,
+                        " with ttl" if with_ttl and ttl else "",
+                        type(exc).__name__,
+                        str(exc)[:160],
+                    )
+                    continue
                 store = getattr(cache, "cache", None)  # the backend object behind litellm.Cache
                 if store is None or not hasattr(store, "get_cache") or not hasattr(store, "set_cache"):
                     logger.warning("LiteLLM %s cache has no usable backend; trying next option", name)
