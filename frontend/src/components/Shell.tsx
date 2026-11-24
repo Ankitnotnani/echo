@@ -1,36 +1,23 @@
 import type { HealthState } from "../lib/types";
-import {
-  IconBack, IconBell, IconBook, IconChart, IconChat, IconFolder, IconForward, IconGrid, IconHome,
-  IconLogo, IconSearch, IconSettings, IconSpark, IconUser,
-} from "./Icons";
+import { IconBack, IconBell, IconChart, IconChat, IconForward, IconHome, IconLogo, IconSearch } from "./Icons";
 
 interface RailProps {
   onHome: () => void;
+  onChat: () => void;
   onOverview: () => void;
   mode: "chat" | "overview";
 }
 
-export function Rail({ onHome, onOverview, mode }: RailProps) {
+export function Rail({ onHome, onChat, onOverview, mode }: RailProps) {
   return (
     <nav className="rail" aria-label="Main">
       <button className="tile tile-logo" data-anim="rail" onClick={onHome} aria-label="Echo home" title="Echo">
         <IconLogo />
       </button>
       <div className="rail-group">
-        <button className="tile" data-anim="rail" onClick={onHome} aria-label="Home" title="Home"><IconHome /></button>
-        <button className={`tile ${mode === "chat" ? "is-active" : ""}`} data-anim="rail" onClick={onHome} aria-label="AI Assistant" title="AI Assistant"><IconChat /></button>
+        <button className="tile" data-anim="rail" onClick={onHome} aria-label="Home" title="Home (new chat)"><IconHome /></button>
+        <button className={`tile ${mode === "chat" ? "is-active" : ""}`} data-anim="rail" onClick={onChat} aria-label="AI Assistant" title="AI Assistant"><IconChat /></button>
         <button className={`tile ${mode === "overview" ? "is-active" : ""}`} data-anim="rail" onClick={onOverview} aria-label="Overview" title="Overview"><IconChart /></button>
-      </div>
-      <div className="rail-group">
-        <button className="tile" data-anim="rail" aria-label="Workspace" title="Workspace (coming soon)"><IconGrid /></button>
-        <button className="tile" data-anim="rail" aria-label="Prompts" title="Prompts (coming soon)"><IconSpark /></button>
-        <button className="tile" data-anim="rail" aria-label="Files" title="Files (coming soon)"><IconFolder /></button>
-        <button className="tile" data-anim="rail" aria-label="Library" title="Library (coming soon)"><IconBook /></button>
-      </div>
-      <div className="rail-spacer" />
-      <div className="rail-group">
-        <button className="tile" data-anim="rail" aria-label="Profile" title="Ankit Notnani"><IconUser /></button>
-        <button className="tile" data-anim="rail" onClick={onOverview} aria-label="Settings and status" title="Status"><IconSettings /></button>
       </div>
     </nav>
   );

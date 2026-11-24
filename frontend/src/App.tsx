@@ -198,7 +198,7 @@ export default function App() {
 
   return (
     <div ref={rootRef} className={`app ${entering ? "is-entering" : ""}`} data-view={showOverview ? "overview" : view}>
-      <Rail onHome={newChat} onOverview={() => setMode("overview")} mode={mode} />
+      <Rail onHome={newChat} onChat={() => setMode("chat")} onOverview={() => setMode("overview")} mode={mode} />
 
       <div className="main">
         <div className="glow" aria-hidden="true" />
