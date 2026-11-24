@@ -1,0 +1,117 @@
+/* Design tokens. Every length is in reference pixels of a 1440×1008 artboard,
+   multiplied by --u so the whole UI scales with the viewport. */
+
+:root {
+  --u: min(calc(100vw / 1440), calc(100vh / 1008));
+
+  --bg: #0e0e0e;
+  --s1: #151515;
+  --s2: #191919;
+  --s3: #1d1d1d;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.11);
+
+  --text: #ffffff;
+  --text-2: #8c8c8c;
+  --text-3: #6e6e6e;
+  --text-soft: #d6d6d6;
+  --cool: #8fa0c4; /* cool blue-grey for search text */
+
+  --blue: #2f6bff;
+  --indigo: #4a5cf8;
+  --violet: #5a4cf5;
+  --grad: linear-gradient(135deg, var(--blue), var(--violet));
+
+  --font: "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  color-scheme: dark;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --u: min(calc(100vw / 1440), calc(100dvh / 1008));
+  }
+}
+
+/* Tablet: fluid, never smaller than a readable size */
+@media (max-width: 1024px) and (min-width: 641px) {
+  :root {
+    --u: clamp(0.72px, calc(100vw / 1100), 1px);
+  }
+}
+
+/* Phone: scale against a 400px-wide reference */
+@media (max-width: 640px) {
+  :root {
+    --u: calc(100vw / 400);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: calc(14 * var(--u));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  overflow: clip; /* also blocks programmatic scrolling of the page */
+}
+
+html {
+  overflow: hidden;
+  overflow: clip;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+:focus-visible {
+  outline: calc(2 * var(--u)) solid rgba(47, 107, 255, 0.75);
+  outline-offset: calc(2 * var(--u));
+}
+
+svg {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,36 @@
+# `make up` (or `docker compose up -d --build`) starts the whole stack:
+#   backend  -> http://localhost:8000   (FastAPI + LiteLLM, SQLite on the app_data volume)
+#   frontend -> http://localhost:3000   (React build served by nginx)
+services:
+  backend:
+    build:
+      context: ./backend
+      target: runtime
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Inside Docker the database and cache always live on the named volume,
+      # whatever .env says for running without Docker.
+      DATABASE_URL: sqlite:////data/app.db
+      CACHE_DIR: /data/llm_cache
+    volumes:
+      - app_data:/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      # The browser calls the API from your machine, so this is localhost, not "backend".
+      API_URL: ${PUBLIC_API_URL:-http://localhost:8000}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  app_data:
