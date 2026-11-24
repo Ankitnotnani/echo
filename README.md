@@ -15,7 +15,7 @@ Every reply shows where it came from (`LIVE_INFERENCE` or `LLM_CACHE`), the mode
 | Backend | https://echo-api-xhvp.onrender.com |
 | Health | https://echo-api-xhvp.onrender.com/health |
 | GitHub | https://github.com/Ankitnotnani/echo |
-| Demo video | *(link added after recording)* |
+| Demo video | https://drive.google.com/file/d/1neUoO5V8RNXmbvH9t0P7kI_nZpRdLmmb/view?usp=sharing |
 
 > The backend runs on Render's free tier, which sleeps after ~15 minutes idle. The first request after that can take ~50 seconds; the UI shows "Waking up the server…" and retries automatically.
 
